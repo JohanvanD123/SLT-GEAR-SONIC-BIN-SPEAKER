@@ -1,1 +1,1280 @@
-# SLT-GEAR-SONIC-BIN-SPEAKER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLT Sonic Bin | Wheelie Bin. Reinvented.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-lime: #a4e400;
+            --neon-lime-dim: #7ab300;
+            --gold: #e5a800;
+            --gold-bright: #ffcc00;
+            --black: #0a0a0a;
+            --black-light: #111111;
+            --black-card: #161616;
+            --gray-dark: #1e1e1e;
+            --gray-mid: #2a2a2a;
+            --gray-text: #888888;
+            --white: #ffffff;
+            --white-off: #e0e0e0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--gray-mid); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-lime); }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.2rem 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gray-mid);
+            padding: 0.8rem 4%;
+        }
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logo span { color: var(--neon-lime); }
+        .logo .pulse {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--neon-lime);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px var(--neon-lime);
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--white-off);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-lime);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--neon-lime); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            background: var(--neon-lime);
+            color: var(--black);
+            padding: 0.6rem 1.8rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--neon-lime);
+        }
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--neon-lime);
+            box-shadow: 0 0 20px rgba(164, 228, 0, 0.3);
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, var(--black) 70%);
+        }
+        .hero-bg-grid {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(164, 228, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(164, 228, 0, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+        }
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+        .hero-particles {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: var(--neon-lime);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(164, 228, 0, 0.1);
+            border: 1px solid rgba(164, 228, 0, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--neon-lime);
+            margin-bottom: 2rem;
+            animation: fadeInDown 1s ease;
+        }
+        .hero-badge .dot {
+            width: 6px; height: 6px;
+            background: var(--neon-lime);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        .hero h1 .sonic {
+            color: var(--white);
+            text-shadow: 0 0 40px rgba(255,255,255,0.1);
+        }
+        .hero h1 .bin {
+            color: var(--neon-lime);
+            text-shadow: 0 0 60px rgba(164, 228, 0, 0.4);
+        }
+        .hero-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--gray-text);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+        .btn-primary {
+            background: var(--neon-lime);
+            color: var(--black);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--neon-lime);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--neon-lime);
+            box-shadow: 0 0 30px rgba(164, 228, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gray-mid);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        .visualizer-container {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 60px;
+            z-index: 5;
+        }
+        .bar {
+            width: 4px;
+            background: var(--neon-lime);
+            border-radius: 2px;
+            opacity: 0.6;
+            animation: equalize 1s ease-in-out infinite;
+        }
+        @keyframes equalize {
+            0%, 100% { height: 20%; }
+            50% { height: 100%; }
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-text);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+        .scroll-indicator svg {
+            width: 24px; height: 24px;
+            stroke: var(--neon-lime);
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sections */
+        section { padding: 6rem 4%; position: relative; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--neon-lime);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .section-desc {
+            color: var(--gray-text);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Features */
+        .features { background: var(--black-light); }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: var(--black-card);
+            border: 1px solid var(--gray-dark);
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--neon-lime);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .feature-card:hover::before { transform: scaleX(1); }
+        .feature-card:hover {
+            border-color: var(--neon-lime);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .feature-icon {
+            width: 60px; height: 60px;
+            background: rgba(164, 228, 0, 0.1);
+            border: 1px solid rgba(164, 228, 0, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+        .feature-card p {
+            color: var(--gray-text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Showcase */
+        .showcase { background: var(--black); overflow: hidden; }
+        .showcase-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .showcase-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bin-silhouette {
+            width: 280px;
+            height: 420px;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+            border-radius: 20px 20px 8px 8px;
+            position: relative;
+            border: 2px solid var(--gray-mid);
+            box-shadow: 0 0 60px rgba(164, 228, 0, 0.1), inset 0 0 40px rgba(0,0,0,0.5);
+        }
+        .bin-silhouette::before {
+            content: '';
+            position: absolute;
+            top: -20px; left: 50%;
+            transform: translateX(-50%);
+            width: 200px; height: 30px;
+            background: var(--gray-dark);
+            border-radius: 8px 8px 0 0;
+            border: 2px solid var(--gray-mid);
+        }
+        .bin-silhouette::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; left: 50%;
+            transform: translateX(-50%);
+            width: 240px; height: 20px;
+            background: var(--gray-dark);
+            border-radius: 0 0 8px 8px;
+        }
+        .speaker-cone {
+            position: absolute;
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #222 30%, #111 70%);
+            border: 3px solid var(--gray-mid);
+            box-shadow: 0 0 30px rgba(164, 228, 0, 0.15);
+        }
+        .speaker-cone:nth-child(1) { top: 80px; left: 50%; transform: translateX(-50%); }
+        .speaker-cone:nth-child(2) { bottom: 80px; left: 50%; transform: translateX(-50%); }
+        .speaker-cone::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--black);
+            border: 2px solid var(--gray-mid);
+        }
+        .glow-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px; height: 160px;
+            border-radius: 50%;
+            border: 1px solid rgba(164, 228, 0, 0.2);
+            animation: ringPulse 3s infinite;
+        }
+        @keyframes ringPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
+        }
+        .showcase-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        .showcase-content h2 span { color: var(--neon-lime); }
+        .showcase-content p {
+            color: var(--gray-text);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        .spec-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        .spec-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--gray-dark);
+            color: var(--white-off);
+            font-size: 0.95rem;
+        }
+        .spec-list li svg {
+            width: 20px; height: 20px;
+            color: var(--neon-lime);
+            flex-shrink: 0;
+        }
+
+        /* App Section */
+        .app-section {
+            background: linear-gradient(180deg, var(--black-light) 0%, var(--black) 100%);
+        }
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .app-content { order: 2; }
+        .app-visual {
+            order: 1;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .phone-mockup {
+            width: 220px;
+            height: 440px;
+            background: var(--black-card);
+            border: 2px solid var(--gray-mid);
+            border-radius: 30px;
+            padding: 10px;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+        .phone-mockup:nth-child(2) { transform: translateY(30px); }
+        .phone-screen {
+            width: 100%; height: 100%;
+            background: var(--black);
+            border-radius: 22px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .phone-notch {
+            width: 80px; height: 20px;
+            background: var(--black);
+            border-radius: 0 0 12px 12px;
+            margin: 0 auto;
+        }
+        .phone-ui {
+            flex: 1;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .phone-header {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--neon-lime);
+            letter-spacing: 1px;
+        }
+        .eq-bar-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 3px;
+            height: 80px;
+            padding: 0.5rem;
+            background: rgba(164, 228, 0, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(164, 228, 0, 0.1);
+        }
+        .eq-bar-phone {
+            width: 8px;
+            background: var(--neon-lime);
+            border-radius: 2px;
+            opacity: 0.8;
+            animation: phoneEqualize 0.8s ease-in-out infinite;
+        }
+        @keyframes phoneEqualize {
+            0%, 100% { height: 20%; }
+            50% { height: 90%; }
+        }
+        .phone-btn {
+            padding: 0.6rem;
+            background: var(--gray-dark);
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--gray-text);
+        }
+        .phone-btn.active {
+            background: rgba(164, 228, 0, 0.15);
+            color: var(--neon-lime);
+            border: 1px solid rgba(164, 228, 0, 0.3);
+        }
+        .app-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+        .app-content h2 span { color: var(--gold); }
+        .app-content p {
+            color: var(--gray-text);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        .app-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .app-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: var(--black-card);
+            border: 1px solid var(--gray-dark);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--white-off);
+            transition: all 0.3s ease;
+        }
+        .app-feature-item:hover {
+            border-color: var(--gold);
+            transform: translateX(5px);
+        }
+        .app-feature-item svg {
+            width: 20px; height: 20px;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        /* Branding */
+        .branding { background: var(--black-light); }
+        .branding-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .branding-card {
+            background: var(--black-card);
+            border: 1px solid var(--gray-dark);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .branding-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        .branding-card .brand-option {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        .branding-card .brand-preview {
+            width: 100%; height: 120px;
+            background: var(--black);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-dark);
+        }
+        .branding-card .brand-preview span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+        }
+        .branding-card .brand-preview span.gold { color: var(--gold); }
+        .branding-card p {
+            color: var(--gray-text);
+            font-size: 0.85rem;
+        }
+
+        /* Use Cases */
+        .use-cases { background: var(--black); }
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .case-card {
+            background: var(--black-card);
+            border: 1px solid var(--gray-dark);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .case-card:hover {
+            border-color: var(--neon-lime);
+            transform: scale(1.03);
+        }
+        .case-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .case-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        .case-card p {
+            color: var(--gray-text);
+            font-size: 0.85rem;
+        }
+
+        /* Stats */
+        .stats {
+            background: linear-gradient(135deg, var(--black-light) 0%, var(--black) 100%);
+            border-top: 1px solid var(--gray-dark);
+            border-bottom: 1px solid var(--gray-dark);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--neon-lime);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(164, 228, 0, 0.2);
+        }
+        .stat-item p {
+            color: var(--gray-text);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--black-light);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(164, 228, 0, 0.05) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .cta-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+        .cta-section p {
+            color: var(--gray-text);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            border-top: 1px solid var(--gray-dark);
+            padding: 3rem 4%;
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+        .footer-logo span { color: var(--neon-lime); }
+        .footer-tagline {
+            color: var(--gray-text);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: var(--gray-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: var(--neon-lime); }
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .footer-social a {
+            width: 40px; height: 40px;
+            border: 1px solid var(--gray-mid);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .footer-social a:hover {
+            border-color: var(--neon-lime);
+            color: var(--neon-lime);
+            transform: translateY(-3px);
+        }
+        .footer-copy {
+            color: var(--gray-text);
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .showcase-container, .app-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .app-content { order: 1; }
+            .app-visual { order: 2; }
+            .cases-grid { grid-template-columns: repeat(2, 1fr); }
+            .branding-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .cases-grid { grid-template-columns: 1fr; }
+            .branding-grid { grid-template-columns: 1fr; }
+            .app-features { grid-template-columns: 1fr; }
+            section { padding: 4rem 2rem; }
+            .hero-cta-group { flex-direction: column; align-items: center; }
+            .btn-primary, .btn-secondary { width: 100%; max-width: 300px; justify-content: center; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="#" class="logo">SLT<span>GEAR</span><span class="pulse"></span></a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#showcase">Product</a></li>
+            <li><a href="#app">App</a></li>
+            <li><a href="#branding">Branding</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Pre-Order</a>
+        <button class="mobile-menu-btn">&#9776;</button>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg-grid"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-badge"><span class="dot"></span>New Release 2026</div>
+            <h1><span class="sonic">SONIC</span><br><span class="bin">BIN</span></h1>
+            <p class="hero-subtitle">Wheelie Bin. Reinvented.</p>
+            <p class="hero-desc">Outdoor sound system in a bin. Link multiple bins together for massive, powerful sound. Built to move. Built to thump.</p>
+            <div class="hero-cta-group">
+                <a href="#showcase" class="btn-primary">Explore Sonic Bin <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                <a href="#app" class="btn-secondary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Demo</a>
+            </div>
+        </div>
+        <div class="visualizer-container" id="visualizer"></div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item reveal"><h3>&#8734;</h3><p>Linkable Bins</p></div>
+            <div class="stat-item reveal"><h3>12h+</h3><p>Battery Life</p></div>
+            <div class="stat-item reveal"><h3>IP65</h3><p>Weather Rated</p></div>
+            <div class="stat-item reveal"><h3>360&deg;</h3><p>Sound Coverage</p></div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="section-header reveal">
+            <span class="section-label">Capabilities</span>
+            <h2 class="section-title">Built for the <span style="color: var(--neon-lime);">Streets</span></h2>
+            <p class="section-desc">Every detail engineered for outdoor performance. From backyard parties to festival stages.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon">&#128279;</div>
+                <h3>Link Multiple Bins</h3>
+                <p>Sync unlimited bins wirelessly for massive, synchronized sound. Daisy-chain your audio empire across any venue.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">&#128266;</div>
+                <h3>Powerful Bass</h3>
+                <p>Deep, punchy bass that moves the crowd. Custom-tuned drivers deliver low-end you can feel in your chest.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">&#128267;</div>
+                <h3>All-Day Battery</h3>
+                <p>Long-lasting rechargeable power for all-day events. Keep the music going from sunrise to sunset and beyond.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">&#127783;</div>
+                <h3>Weather Resistant</h3>
+                <p>Built tough for any outdoor condition. Rain, dust, or shine &mdash; the Sonic Bin performs when others pack up.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">&#127919;</div>
+                <h3>Portable &amp; Robust</h3>
+                <p>Easy to move, built to perform. Rugged wheelie-bin chassis handles transport while protecting your sound.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">&#128241;</div>
+                <h3>App Control</h3>
+                <p>Full wireless control via the SLT Gear One app. EQ, playlists, battery status, and linking &mdash; all in your pocket.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="showcase" id="showcase">
+        <div class="showcase-container">
+            <div class="showcase-visual reveal">
+                <div class="bin-silhouette">
+                    <div class="speaker-cone"><div class="glow-ring"></div></div>
+                    <div class="speaker-cone"><div class="glow-ring" style="animation-delay: 0.5s;"></div></div>
+                </div>
+            </div>
+            <div class="showcase-content reveal">
+                <h2>One Bin.<br><span>Endless Possibilities.</span></h2>
+                <p>The Sonic Bin transforms an everyday wheelie bin into a concert-grade sound system. High-efficiency amplifiers, custom woofers, and precision tweeters hidden inside a rugged, portable chassis.</p>
+                <ul class="spec-list">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Dual 12&quot; High-Excursion Woofers</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Class-D Amplifier &mdash; 2000W Peak</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Bluetooth 5.3 + Aux Input + USB-C</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>120dB Max SPL &mdash; Stadium Ready</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Quick-Swap Battery Packs</li>
+                </ul>
+                <a href="#contact" class="btn-primary">Reserve Yours <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="app-section" id="app">
+        <div class="app-container">
+            <div class="app-content reveal">
+                <span class="section-label" style="text-align: left; display: block;">Mobile Control</span>
+                <h2>SLT Gear One <span>App</span></h2>
+                <p>Control. Connect. Customize. The SLT Gear One app puts full command of your Sonic Bin in the palm of your hand. Manage multiple bins, fine-tune your EQ, and monitor battery levels in real-time.</p>
+                <div class="app-features">
+                    <div class="app-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>Play Music</div>
+                    <div class="app-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>Equalizer &amp; Sync</div>
+                    <div class="app-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Link &amp; Sync</div>
+                    <div class="app-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Live Levels</div>
+                    <div class="app-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/></svg>Battery Status</div>
+                    <div class="app-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Custom Settings</div>
+                </div>
+            </div>
+            <div class="app-visual reveal">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="phone-notch"></div>
+                        <div class="phone-ui">
+                            <div class="phone-header">SONIC BIN</div>
+                            <div class="eq-bar-container">
+                                <div class="eq-bar-phone" style="height: 40%; animation-delay: 0s;"></div>
+                                <div class="eq-bar-phone" style="height: 70%; animation-delay: 0.1s;"></div>
+                                <div class="eq-bar-phone" style="height: 50%; animation-delay: 0.2s;"></div>
+                                <div class="eq-bar-phone" style="height: 90%; animation-delay: 0.3s;"></div>
+                                <div class="eq-bar-phone" style="height: 60%; animation-delay: 0.4s;"></div>
+                                <div class="eq-bar-phone" style="height: 80%; animation-delay: 0.5s;"></div>
+                                <div class="eq-bar-phone" style="height: 45%; animation-delay: 0.6s;"></div>
+                                <div class="eq-bar-phone" style="height: 75%; animation-delay: 0.7s;"></div>
+                            </div>
+                            <div class="phone-btn active">BASS BOOST</div>
+                            <div class="phone-btn">TREBLE</div>
+                            <div class="phone-btn">VOCAL</div>
+                            <div class="phone-btn">FLAT</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="phone-notch"></div>
+                        <div class="phone-ui">
+                            <div class="phone-header">PLAYLIST</div>
+                            <div style="background: rgba(229,168,0,0.1); border: 1px solid rgba(229,168,0,0.2); border-radius: 6px; padding: 0.6rem; margin-bottom: 0.5rem;">
+                                <div style="font-size: 0.7rem; color: var(--gold);">Now Playing</div>
+                                <div style="font-size: 0.75rem; color: var(--white); margin-top: 0.2rem;">Bohemian Rhapsody</div>
+                            </div>
+                            <div class="phone-btn">Track 02</div>
+                            <div class="phone-btn">Track 03</div>
+                            <div class="phone-btn">Track 04</div>
+                            <div style="margin-top: auto; display: flex; justify-content: center; gap: 1rem; padding: 0.5rem;">
+                                <span style="color: var(--gold); font-size: 1.2rem;">&#9664;&#9664;</span>
+                                <span style="color: var(--neon-lime); font-size: 1.5rem;">&#9654;</span>
+                                <span style="color: var(--gold); font-size: 1.2rem;">&#9654;&#9654;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="branding" id="branding">
+        <div class="section-header reveal">
+            <span class="section-label">Customization</span>
+            <h2 class="section-title">Choose Your <span style="color: var(--gold);">Style</span></h2>
+            <p class="section-desc">Make it yours. From minimal logos to bold brand stripes &mdash; customize your Sonic Bin to match your vibe.</p>
+        </div>
+        <div class="branding-grid">
+            <div class="branding-card reveal">
+                <div class="brand-option">Option 1</div>
+                <div class="brand-preview"><span>SLT</span></div>
+                <p>Minimal Front Logo + Vertical Side Logo</p>
+            </div>
+            <div class="branding-card reveal">
+                <div class="brand-option">Option 2</div>
+                <div class="brand-preview"><span class="gold">SLT</span></div>
+                <p>Bold Vertical Brand Stripe</p>
+            </div>
+            <div class="branding-card reveal">
+                <div class="brand-option">Option 3</div>
+                <div class="brand-preview"><span>SLT</span></div>
+                <p>Large Center Logo + Accent Pattern</p>
+            </div>
+            <div class="branding-card reveal">
+                <div class="brand-option">Option 4</div>
+                <div class="brand-preview"><span class="gold">SLT</span></div>
+                <p>Boxed Logo + Soundwave Accent</p>
+            </div>
+            <div class="branding-card reveal">
+                <div class="brand-option">Option 5</div>
+                <div class="brand-preview"><span>SLT</span></div>
+                <p>Premium Plate Logo (Embossed Look)</p>
+            </div>
+            <div class="branding-card reveal">
+                <div class="brand-option">Option 6</div>
+                <div class="brand-preview"><span class="gold">SLT</span></div>
+                <p>Industrial Stripe Style</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="use-cases" id="use-cases">
+        <div class="section-header reveal">
+            <span class="section-label">Versatility</span>
+            <h2 class="section-title">Perfect For <span style="color: var(--neon-lime);">Anywhere</span></h2>
+            <p class="section-desc">From intimate gatherings to massive crowds, the Sonic Bin adapts to your event.</p>
+        </div>
+        <div class="cases-grid">
+            <div class="case-card reveal">
+                <div class="case-icon">&#127967;</div>
+                <h3>Outdoor Venues</h3>
+                <p>Parks, beaches, rooftops &mdash; anywhere the party takes you.</p>
+            </div>
+            <div class="case-card reveal">
+                <div class="case-icon">&#127939;</div>
+                <h3>Sports Days</h3>
+                <p>Pump up the crowd and keep energy high all game long.</p>
+            </div>
+            <div class="case-card reveal">
+                <div class="case-icon">&#127891;</div>
+                <h3>School Events</h3>
+                <p>Dances, fundraisers, and campus celebrations made epic.</p>
+            </div>
+            <div class="case-card reveal">
+                <div class="case-icon">&#127914;</div>
+                <h3>Markets &amp; Fairs</h3>
+                <p>Draw crowds and create atmosphere for vendors and visitors.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+        <div class="cta-content reveal">
+            <span class="section-label">Get Started</span>
+            <h2>Link Up.<br>Louder <span style="color: var(--neon-lime);">Together.</span></h2>
+            <p>Ready to revolutionize your outdoor audio? Pre-order the SLT Sonic Bin today and be the first to experience the future of portable sound.</p>
+            <div class="hero-cta-group" style="justify-content: center;">
+                <a href="#" class="btn-primary" onclick="alert('Thank you for your interest! Pre-order coming soon.'); return false;">Pre-Order Now <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                <a href="#" class="btn-secondary" onclick="alert('Our team will contact you shortly!'); return false;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">SLT<span>GEAR ONE</span></div>
+        <p class="footer-tagline">Engineered for Performance. Designed for Anywhere.</p>
+        <div class="footer-links">
+            <a href="#features">Features</a>
+            <a href="#showcase">Product</a>
+            <a href="#app">App</a>
+            <a href="#branding">Branding</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://sltgearone.co.za" target="_blank" title="Website">&#127760;</a>
+            <a href="#" title="Facebook">&#128220;</a>
+            <a href="#" title="Instagram">&#128247;</a>
+        </div>
+        <p class="footer-copy">&copy; 2026 SLT Gear One. All rights reserved. SLT Sound Solutions.</p>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        // Generate particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particle.style.width = (2 + Math.random() * 4) + 'px';
+            particle.style.height = particle.style.width;
+            particlesContainer.appendChild(particle);
+        }
+
+        // Generate visualizer bars
+        const visualizer = document.getElementById('visualizer');
+        for (let i = 0; i < 40; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.animationDelay = (i * 0.05) + 's';
+            bar.style.animationDuration = (0.5 + Math.random() * 0.5) + 's';
+            bar.style.height = (20 + Math.random() * 80) + '%';
+            visualizer.appendChild(bar);
+        }
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Mobile menu
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.background = 'rgba(10,10,10,0.98)';
+            navLinks.style.padding = '2rem';
+            navLinks.style.gap = '1.5rem';
+            navLinks.style.borderBottom = '1px solid var(--gray-mid)';
+        });
+    </script>
+</body>
+</html>
